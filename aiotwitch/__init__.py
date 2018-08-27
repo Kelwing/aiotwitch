@@ -10,3 +10,5 @@ __title__ = 'aiotwitch'
 __author__ = 'Kelwing'
 __license__ = 'GPLv3'
 __version__ = '0.1dev'
+
+from .client import Client
