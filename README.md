@@ -13,4 +13,4 @@ A simple asyncio wrapper for the Twtich Helix API
 Feel free to fork and make PR's.  Contact me on Discord (Kelwing#0001) if you'd like to chat.
 
 ## Credits
-HTTP handling heavily inspired by [discord.py](https://github.com/Rapptz/discord.py) by Rapptz.
+HTTP handling and overall design heavily inspired by [discord.py](https://github.com/Rapptz/discord.py) by Rapptz.
