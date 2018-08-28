@@ -8,12 +8,12 @@ from . import __version__
 from .auth import AuthToken
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('aiotwitch')
 
 
 async def json_or_text(response):
     text = await response.text(encoding='utf-8')
-    if response.headers['content-type'] == 'application/json':
+    if response.headers['content-type'].startswith('application/json'):
         return json.loads(text)
     return text
 
@@ -40,6 +40,9 @@ class HTTPClient:
         self.user_agent = f'aiotwitch (https://github.com/kelwing/aiotwitch {__version__}) ' \
                           f'Python/{version[0]}.{version[1]} aiohttp/{aiohttp.__version__}'
 
+    def __del__(self):
+        self.loop.run_until_complete(self._session.close())
+
     async def request(self, route, **kwargs):
         """
         Send a request to Twitch
@@ -53,7 +56,7 @@ class HTTPClient:
         headers = {
             'User-Agent': self.user_agent,
             'Content-Type': 'application/json',
-            'Authorization': f"Bearer {self.auth}"
+            'Authorization': f"Bearer {await self.auth.get()}"
         }
 
         kwargs['headers'] = headers

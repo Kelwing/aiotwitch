@@ -36,7 +36,7 @@ class AuthToken:
         return self.token
 
     def __repr__(self):
-        return self.get()
+        return self.token
 
     def __str__(self):
-        return self.get()
+        return self.token
