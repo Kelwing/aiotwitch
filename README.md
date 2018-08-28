@@ -1,4 +1,7 @@
 # aiotwitch
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/11316dd6934b472d9cf41b404324f8d1)](https://app.codacy.com/app/Kelwing/aiotwitch?utm_source=github.com&utm_medium=referral&utm_content=Kelwing/aiotwitch&utm_campaign=Badge_Grade_Dashboard)
+
 A simple asyncio wrapper for the Twtich Helix API
 
 ## TODO
