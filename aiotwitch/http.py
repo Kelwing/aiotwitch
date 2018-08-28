@@ -6,6 +6,7 @@ import sys
 from urllib.parse import quote as _uriquote
 from . import __version__
 from .auth import AuthToken
+from .errors import BadRequest, Unauthorized, Forbidden, NotFound
 
 
 logger = logging.getLogger('aiotwitch')
@@ -13,6 +14,7 @@ logger = logging.getLogger('aiotwitch')
 
 async def json_or_text(response):
     text = await response.text(encoding='utf-8')
+    # Twitch appends a character set to the content-type, so startswith is necessary
     if response.headers['content-type'].startswith('application/json'):
         return json.loads(text)
     return text
@@ -67,3 +69,15 @@ class HTTPClient:
             if 300 > r.status >= 200:
                 logger.debug('%s %s has received %s', method, url, data)
                 return data
+
+            if r.status == 400:
+                raise BadRequest
+
+            if r.status == 401:
+                raise Unauthorized
+
+            if r.status == 403:
+                raise Forbidden
+
+            if r.status == 404:
+                raise NotFound

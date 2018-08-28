@@ -41,7 +41,7 @@ class Client:
         data = await self.http.request(route)
         return [Subscription(d) for d in data['data']]
 
-    async def add_webhook_subscription(self, topic, callback, lease_seconds=0, secret=None):
+    async def add_webhook_subscription(self, *, topic, callback, lease_seconds=0, secret=None):
         """
         Add a subscription to be notified at the given callback
         :param topic: Twitch topic to subscribe to
