@@ -40,3 +40,25 @@ class Client:
         route = Route("GET", '/webhooks/subscriptions')
         data = await self.http.request(route)
         return [Subscription(d) for d in data['data']]
+
+    async def add_webhook_subscription(self, topic, callback, lease_seconds=0, secret=None):
+        """
+        Add a subscription to be notified at the given callback
+        :param topic: Twitch topic to subscribe to
+        :param callback: Callback that should be notified
+        :param lease_seconds: Amount of time to subscribe for, maximum 864000
+        :param secret: Secret used to sign callback payload
+        :return: NoneType
+        """
+
+        data = {
+            'hub.callback': callback,
+            'hub.mode': 'subscribe',
+            'hub.topic': topic,
+            'hub.lease_seconds': lease_seconds,
+            'hub.secret': secret
+        }
+
+        route = Route("POST", '/webhooks/hub')
+        await self.http.request(route, json=data)
+        return
