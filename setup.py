@@ -18,7 +18,7 @@ setup(
     install_requires=requirements,
     long_description=readme,
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 2 - Pre-Alpha',
         'Framework :: AsyncIO',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Intended Audience :: Developers',
