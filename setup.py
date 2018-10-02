@@ -14,7 +14,7 @@ setup(
     license='GPLv3',
     description='A python wrapper for the Twitch Helix API',
     url='https://github.com/kelwing/aiotwitch',
-    python_requires='>=3.6.6',
+    python_requires='>=3.6',
     install_requires=requirements,
     long_description=readme,
     classifiers=[
