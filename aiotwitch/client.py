@@ -2,6 +2,7 @@ import asyncio
 from .http import HTTPClient, Route
 from .subscription import Subscription
 from .user import User
+from .stream import Stream
 
 
 class Client:
@@ -62,3 +63,15 @@ class Client:
         route = Route("POST", '/webhooks/hub')
         await self.http.request(route, json=data)
         return
+
+    async def get_streams_by_login(self, *logins):
+        """
+        Get a list of streams by user login
+        :param logins: Twitch user logins
+        :return: A list of :class:.stream.Stream
+        """
+
+        params = [('user_login', l) for l in logins]
+        route = Route("GET", "/streams")
+        data = await self.http.request(route, params=params)
+        return [Stream(d) for d in data['data']]
