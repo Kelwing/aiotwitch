@@ -54,11 +54,11 @@ class HTTPClient:
         """
         method = route.method
         url = route.url
-
+        auth = await self.auth.get()
         headers = {
             'User-Agent': self.user_agent,
             'Content-Type': 'application/json',
-            'Authorization': f"Bearer {await self.auth.get()}"
+            'Authorization': f"Bearer {auth}"
         }
 
         kwargs['headers'] = headers
